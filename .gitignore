@@ -1,3 +1,8 @@
+#user files
+*main
+*.vscode
+*.json
+
 # Prerequisites
 *.d
 
