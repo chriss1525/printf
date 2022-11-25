@@ -6,6 +6,7 @@
 int _printf(const char *format, ...)
 {
 	va_list ptr;
+
 	va_start(ptr, format);
 	int i = 0;
 	int j = 0;
@@ -40,7 +41,5 @@ int _printf(const char *format, ...)
 		i++;
 	}
 	va_end(ptr);
-	i = 0;
-	j = 0;
 	return (len);
 }
