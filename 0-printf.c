@@ -1,6 +1,5 @@
 #include "main.h"
 #include <stdio.h>
-#include <stdlib.h>
 #include <stdarg.h>
 #include <string.h>
 
@@ -15,7 +14,7 @@ int _printf(const char *format, ...)
 	va_list ptr;
 	int i = 0;
 	int j = 0;
-	int len = (strlen(format));
+	int len = 0;
 	char *str2 = NULL;
 
 	va_start(ptr, format);
@@ -26,14 +25,21 @@ int _printf(const char *format, ...)
 		if (*(format + i) != '%')
 		{
 			_putchar(format[i]);
+			len++;
 		}
 		else
 		/*checking for specifiers*/
 		{
 			i++;
-			if (*(format + i) == 'c')
+			if(*(format + i) == '%')
+			{
+				_putchar(format[i]);
+				len++;
+			}
+			else if (*(format + i) == 'c')
 			{
 				_putchar(va_arg(ptr, int));
+				len++;
 			}
 			else if (*(format + i) == 's')
 			{
@@ -42,6 +48,7 @@ int _printf(const char *format, ...)
 				{
 					_putchar(str2[j]);
 					j++;
+					len++;
 				}
 			}
 		}
