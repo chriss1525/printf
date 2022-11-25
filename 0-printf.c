@@ -7,7 +7,7 @@
  * _printf - produces output accourding to format
  * @format: string, first argument
  * Return: length of format
-*/
+ */
 
 int _printf(const char *format, ...)
 {
@@ -31,7 +31,7 @@ int _printf(const char *format, ...)
 		/*checking for specifiers*/
 		{
 			i++;
-			if(*(format + i) == '%')
+			if (*(format + i) == '%')
 			{
 				_putchar(format[i]);
 				len++;
@@ -44,12 +44,16 @@ int _printf(const char *format, ...)
 			else if (*(format + i) == 's')
 			{
 				str2 = va_arg(ptr, char *);
-				while (str2[j] != '\0')
-				{
-					_putchar(str2[j]);
-					j++;
-					len++;
-				}
+
+					while (str2[j] != '\0')
+					{
+						_putchar(str2[j]);
+						j++;
+						len++;
+					}
+
+					j = 0;
+				
 			}
 		}
 		i++;
@@ -57,3 +61,10 @@ int _printf(const char *format, ...)
 	va_end(ptr);
 	return (len);
 }
+
+/*int main(void)
+{
+	_printf("I want a %s %s\n", "red", "ball");
+	printf("I want a %s %s\n", "red", "ball");
+	return (0);
+}*/
