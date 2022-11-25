@@ -2,16 +2,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include <string.h>
+
+/**
+ * _printf - produces output accourding to format
+ * @format: string, first argument
+ * Return: length of format
+*/
 
 int _printf(const char *format, ...)
 {
 	va_list ptr;
-
-	va_start(ptr, format);
 	int i = 0;
 	int j = 0;
-	int len;
+	int len = (strlen(format));
 	char *str2 = NULL;
+
+	va_start(ptr, format);
 
 	/*printing items in *format*/
 	while (*(format + i) != '\0')
