@@ -24,6 +24,11 @@ int _printf(const char *format, ...)
 		{NULL, NULL},
 	};
 
+	if (format == NULL)
+	{
+		exit(1);
+	}
+
 	va_start(ap, format);
 
 	while (format[i] != '\0')
@@ -49,8 +54,15 @@ int _printf(const char *format, ...)
 				is_identifier = 0;
 			else
 			{
-				len += _putchar(format[i - 1]);
-				len += _putchar(format[i]);
+				if (format[i] == '%')
+				{
+					len += _putchar(format[i]);
+				}
+				else
+				{
+					len += _putchar(format[i - 1]);
+					len += _putchar(format[i]);
+				}
 			}
 		}
 		i++;
