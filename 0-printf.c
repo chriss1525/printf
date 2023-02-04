@@ -11,52 +11,41 @@
 
 int _printf(const char *format, ...)
 {
-	va_list ptr;
+	va_list ap;
+	int len = 0;
 	int i = 0;
 	int j = 0;
-	int len = 0;
-	char *str2 = NULL;
+	function_t list[] = {
+		{"s", print_string},
+		{"c", print_char},
+		{"i", printi},
+		{"d", printi},
+		{NULL, NULL},
+	};
 
-	va_start(ptr, format);
+	va_start(ap, format);
 
-	/*printing items in *format*/
-	while (*(format + i) != '\0')
+	while (format[i] != '\0')
 	{
-		if (*(format + i) != '%')
+		if (format[i] != '%')
 		{
 			_putchar(format[i]);
-			len++;
 		}
 		else
-		/*checking for specifiers*/
 		{
 			i++;
-			if (*(format + i) == '%')
+			j = 0;
+			while (list[j].identifier)
 			{
-				_putchar(format[i]);
-				len++;
-			}
-			else if (*(format + i) == 'c')
-			{
-				_putchar(va_arg(ptr, int));
-				len++;
-			}
-			else if (*(format + i) == 's')
-			{
-				str2 = va_arg(ptr, char *);
-
-				while (str2[j] != '\0')
+				if (*list[j].identifier == format[i])
 				{
-					_putchar(str2[j]);
-					j++;
-					len++;
+					list[j].print_function(ap);
 				}
-
-				j = 0;
+				j++;
 			}
 		}
 		i++;
 	}
-	va_end(ptr);
+	va_end(ap);
 	return (len);
 }
