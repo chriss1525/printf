@@ -15,6 +15,7 @@ int _printf(const char *format, ...)
 	int len = 0;
 	int i = 0;
 	int j = 0;
+	int is_identifier = 0;
 	function_t list[] = {
 		{"s", print_string},
 		{"c", print_char},
@@ -29,7 +30,7 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] != '%')
 		{
-			_putchar(format[i]);
+			len += _putchar(format[i]);
 		}
 		else
 		{
@@ -39,9 +40,17 @@ int _printf(const char *format, ...)
 			{
 				if (*list[j].identifier == format[i])
 				{
-					list[j].print_function(ap);
+					len += list[j].print_function(ap);
+					is_identifier = 1;
 				}
 				j++;
+			}
+			if (is_identifier)
+				is_identifier = 0;
+			else
+			{
+				len += _putchar(format[i - 1]);
+				len += _putchar(format[i]);
 			}
 		}
 		i++;
