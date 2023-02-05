@@ -4,6 +4,7 @@
 *scratch.c
 *.vscode
 *.json
+*a.out
 
 # Prerequisites
 *.d
