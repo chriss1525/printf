@@ -21,6 +21,7 @@ int _printf(const char *format, ...)
 		{"c", print_char},
 		{"i", printi},
 		{"d", printi},
+		{"b", int_to_bin},
 		{NULL, NULL},
 	};
 
